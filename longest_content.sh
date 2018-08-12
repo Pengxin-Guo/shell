@@ -1,8 +1,10 @@
 #!/bin/bash 
 #search for the longest string
+
 max_length=0
 max_file=""
 word=""
+
 function find_maxone() {
     #words=`cat $1 | tr -s -c "a-zA-Z" "\n"`
     words=`cat $1`
@@ -34,8 +36,9 @@ function listFilrs() {
         fi
     done
 }
+
 listFilrs "/home/gpx"
-echo $max_length
-echo $max_file
-echo $word
+echo "最长的字符串长度:"$max_length
+echo "最长的字符串所在的文件位置:"$max_file
+echo "最长的字符串内容:"$word
 
