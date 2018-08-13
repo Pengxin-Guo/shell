@@ -6,7 +6,7 @@ date=$(date "+%y-%m-%d-%T")  #date用于重命名重名的文件
 
 #首先判断dir目录是否存在,不存在的话创建该目录
 if [ ! -d $dir ];then
-    mkdir -p $dir   #参数 -p 可以创建多级目录
+    mkdir -p $dir            #参数 -p 可以创建多级目录
 fi
 
 args=""       #用来存放待删除的文件路径(可能不止一个文件)
@@ -21,16 +21,16 @@ function remove() {
                 new_name="$dir/${file}_$date"
                 mv $file $new_name && echo "$file deleted, you can see in $new_name"
             else                               #目录非空
-                if [[ $flag1 == 1 ]];then           #没有设置删除目录
+                if [[ $flag1 == 1 ]];then               #没有设置删除目录
                     echo "can not remove $file:$file is a directoy"
-                elif [[ $flag2 == 1 ]];then         #没有设置递归删除
+                elif [[ $flag2 == 1 ]];then             #没有设置递归删除
                     echo "can not remove $file:$file is not a empty directoy"
-                else                                #设置了递归删除目录
+                else                                    #设置了递归删除目录
                     new_name="$dir/${file}_$date"
                     mv $file $new_name && echo "$file deleted, you can see in $new_name"
                 fi
             fi
-        elif [ -f "$file" ];then     #file是文件
+        elif [ -f "$file" ];then    #file是文件
             new_name="$dir/${file}_$date"
             mv $file $new_name && echo "$file deleted, you can see in $new_name"      
         else
