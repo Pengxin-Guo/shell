@@ -1,49 +1,38 @@
 #!/bin/bash
 #safe rm shell
 
-#dir=$(date "+%y_%m_%d")
-#dir="/home/gpx/trash/$dir"
 dir="/home/gpx/trash"
-#echo $dir
+date=$(date "+%y-%m-%d-%T")  #date用于重命名重名的文件
+
+#首先判断dir目录是否存在,不存在的话创建该目录
 if [ ! -d $dir ];then
     mkdir -p $dir   #参数 -p 可以创建多级目录
 fi
 
-is_f=false
-args=""
-
-function f_remove() {
-    for i in ${args}; do
-        if [ -d "$i" -o -f "$i" ];then
-            name=`basename $i`
-            if [ -d "$dir/$name" -o -f "$dir/$name" ];then
-                new_name="$dir/${name}_$(date '+%T')"
-                mv $i $new_name && echo "$i deleted, you can see in $new_name"
-            else
-                mv $i $dir && echo "$i deleted, you can see in $dir/$i"
-            fi
-        else
-            echo "wrong param"
-        fi
-    done
-}
+args=""       #用来存放待删除的文件路径(可能不止一个文件)
+flag1=1       #用来判断要删除的是否是文件夹,1代表不是文件夹
+flag2=1       #如果是文件夹的话判断是否可以递归删除,1代表没设置递归删除
 
 function remove() {
-    for j in ${args}; do
-        if [ -d "$j" -o -f "$j" ];then
-            name=`basename $j`
-            read -p "Remove $name?[y/n]" bool
-            if [ $bool == "n" ];then
-                exit
-            elif [ $bool == "y" ];then
-                if [ -d "$dir/$name" -o -f "$dir/$name" ];then
-                    #new_name="$dir/${name}_$(date '+%T')"
-                    new_name="$dir/$name"
-                    mv $j $new_name && echo "$j deleted, you can see in $new_name"
-                else
-                    mv $j $dir && echo "$j deleted, you can see in $dir/$j"
+    for file in ${args}; do
+        if [ -d "$file" ];then      #file是目录
+            files=`ls $file`
+            if [ -z "$files" ]; then           #目录为空
+                new_name="$dir/${file}_$date"
+                mv $file $new_name && echo "$file deleted, you can see in $new_name"
+            else                               #目录非空
+                if [[ $flag1 == 1 ]];then           #没有设置删除目录
+                    echo "can not remove $file:$file is a directoy"
+                elif [[ $flag2 == 1 ]];then         #没有设置递归删除
+                    echo "can not remove $file:$file is not a empty directoy"
+                else                                #设置了递归删除目录
+                    new_name="$dir/${file}_$date"
+                    mv $file $new_name && echo "$file deleted, you can see in $new_name"
                 fi
             fi
+        elif [ -f "$file" ];then     #file是文件
+            new_name="$dir/${file}_$date"
+            mv $file $new_name && echo "$file deleted, you can see in $new_name"      
         else
             echo "wrong param"
         fi
@@ -53,22 +42,26 @@ function remove() {
 while [ "$1" ]; do
     case "$1" in
         -fr|-rf)
-            is_f=true
+            flag1=0
+            flag2=0
+            shift  #shift销毁第一个变量参数,第二个参数则变成第一个
+            ;;
+        -f)
+            flag1=0
+            shift
+            ;;
+        -r)
+            flag2=0
             shift
             ;;
         -i)
-            is_f=false
             shift
             ;;
         *)
-            args="$1 $args"
+            args="$args $1"
             shift
             ;;
     esac
 done
 
-if [[ $if_f == true ]];then
-    f_remove
-else
-    remove
-fi
+remove
