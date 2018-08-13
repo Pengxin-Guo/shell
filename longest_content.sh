@@ -1,9 +1,9 @@
 #!/bin/bash 
 #search for the longest string
 
-max_length=0
-max_file=""
-word=""
+max_length=0    #最长字符串长度,初始化为0
+max_file=""     #所在位置
+word=""         #最长字符串内容
 flag=1
 
 function find_maxone() {
@@ -21,19 +21,17 @@ function find_maxone() {
     done
 }
 
-function listFilrs() {
+function listFilrs() {    
     maxsize=1024
     #1st param, the dir name
     for file in `ls $1`; do
         flag=0
-        if [[ -d "$1/$file" ]]; then
-            #echo "$file"
+        if [[ -d "$1/$file" ]]; then    #如果是目录,则遍历目录下的所有文件
             listFilrs "$1/$file"
         elif [[ `du -s $1/$file|awk '{print $1}'` -gt $maxsize ]]; then
             #echo "$1/$file   文件大小大于1MB"
-            continue
+            continue                    #如果文件大小大于1MB,则跳过
         else
-            #echo "$file"
             find_maxone $1/$file
         fi
     done
