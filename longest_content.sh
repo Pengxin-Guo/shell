@@ -44,8 +44,8 @@ listFilrs $1
 
 if [[ flag -eq 0 ]]; then
     echo "最长的字符串长度:"$max_length
+    echo "最长字符串内容:"$word
     echo "最长的字符串所在的文件位置:"$max_file
-    echo "最长的字符串内容:"$word
 else
     echo "该文件或目录不存在"
 fi
