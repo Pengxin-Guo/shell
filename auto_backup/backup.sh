@@ -28,8 +28,7 @@ for file_path in $backup_path; do
     fi
 done
 
-#Del_list=`find $dest_dir -name *.tar.gz -mtime +3`
-Del_list=`find $dest_dir -name '*.tar.gz' -cmin +3`
+Del_list=`find $dest_dir -name *.tar.gz -mtime +3`
 
 for del_name in $Del_list; do
     size=`du -h ${del_name} | cut -f 1`

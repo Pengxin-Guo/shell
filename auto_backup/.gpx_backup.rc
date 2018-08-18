@@ -1,4 +1,4 @@
-backup_path=/home/gpx/文档/Github/shell:/home/gpx/文档/task 
+backup_path=/home/gpx/文档/Github/shell:/home/gpx/文档/task:/home/gpx/文档/Github/typora 
 dest_dir=/home/gpx/backup_data
 log=/var/log/backup.log
 
