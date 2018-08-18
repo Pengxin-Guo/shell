@@ -1,16 +1,17 @@
 #!/bin/bash
 . /home/gpx/文档/Github/shell/auto_backup/.gpx_backup.rc    #首先执行配置文件
+# 执行配置文件用绝对路径是为了方便在其他路径下执行该代码，例如添加定时任务
 
-backup_path=` echo $backup_path | tr ":" "\n"`
-TIME_NOW=`date +"%y-%m-%d %H:%M"`
-TIME_FILE=`date +"%y_%m_%d_%H:%M"`
+backup_path=` echo $backup_path | tr ":" "\n"`              #将backup_path中的:替换为\n,为了处理多条路径
+TIME_NOW=`date +"%y-%m-%d %H:%M"`                              #记录操作时候的时间
+TIME_FILE=`date +"%y_%m_%d_%H:%M"`                          #对文件重命名时需要加上时间
 
 if [[ ! -d $dest_dir ]]; then
     echo -e "$TIME_NOW \033[37;31m[ERROR]\033[0m The Dest dir $dest_dir not exists" >> $log
     exit
 fi 
 
-echo -e "$TIME_NOW  \033[37;33m backup started! \033[0m" >> $log
+echo -e "$TIME_NOW \033[37;33mbackup started!\033[0m" >> $log
 
 for file_path in $backup_path; do
     if [[ ! -d $file_path ]]; then
