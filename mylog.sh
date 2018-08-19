@@ -1,4 +1,5 @@
 #!/bin/bash 
+
 echo "# 记录用户登录信息" >> /home/gpx/.bashrc  
 cat >> /home/gpx/.bashrc << EOF
 TIME_NOW=\`date -u +"%Y-%m-%d %H:%M"\`
