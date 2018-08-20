@@ -1,4 +1,5 @@
 #!/bin/bash 
+# 自动记录用户登录登出信息
 
 echo "# 记录用户登录信息" >> /home/gpx/.bashrc  
 cat >> /home/gpx/.bashrc << EOF
