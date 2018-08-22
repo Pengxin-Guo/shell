@@ -1,5 +1,5 @@
 # backup_path 代表需要备份的代码目录
-backup_path=/home/gpx/文档/Github/shell:/home/gpx/文档/task:/home/gpx/文档/Github/typora 
+backup_path=/home/gpx/Documents/Github/shell:/home/gpx/Documents/Github/typora
 # dest_dir 代表备份的代码存放的位置
 dest_dir=/home/gpx/backup_data
 # log 代表记录备份信息的日志存放的地方

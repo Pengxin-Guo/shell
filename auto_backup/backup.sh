@@ -1,5 +1,5 @@
 #!/bin/bash
-. /home/gpx/文档/Github/shell/auto_backup/.gpx_backup.rc    #首先执行配置文件
+. /home/gpx/Documents/Github/shell/auto_backup/.gpx_backup.rc    #首先执行配置文件
 # 执行配置文件用绝对路径是为了方便在其他路径下执行该代码，例如添加定时任务
 
 backup_path=` echo $backup_path | tr ":" "\n"`              #将backup_path中的:替换为\n,为了处理多条路径
