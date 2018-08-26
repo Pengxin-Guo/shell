@@ -1,5 +1,10 @@
 #!/bin/bas
 #输出当前计算机的时间、总内存、剩余内存、内存占用率和占用百分比动态平均值
+if [ ! "$1" ];then
+    echo [ERROR]: Missing parameters
+    exit
+fi
+
 last=$1                                                                       #last代表上一个动态平均值,由程序传入这个参数
 date=`date +"%Y-%m-%d__%T"`                                                   #date代表当前时间
 total=`free -m | head -n 2 | tail -n 1 | awk '{printf $2}'`                   #total代表总内存
