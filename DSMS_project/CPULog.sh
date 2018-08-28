@@ -8,8 +8,8 @@ arr_cpu1=(`cat /proc/stat | head -n 1 | cut -d " " -f 2-`)                   #ar
 sleep 0.5                                                                    #CPU等待0.5秒再执行
 arr_cpu2=(`cat /proc/stat | head -n 1 | cut -d " " -f 2-`)                   #arr_cpu2代表时间2下的CPU信息 
 date=`date +"%Y-%d-%m__%T"`                                                  #date代表当前时间，date之所以不能放在第一行是因为程序执行过程中有sleep 0.5这个语句
-total_cup1=0                                                                 #截止到时间1的CPU总使用时间
-total_cpu2=0                                                                 #截止到时间2的CPU总使用时间 
+total_cup1=0                                                                 #total_cup1代表截止到时间1的CPU总使用时间
+total_cpu2=0                                                                 #total_cpu2代表截止到时间2的CPU总使用时间 
 for i in ${arr_cpu1[*]};do
     total_cup1=$[$total_cup1+$i]
 done
@@ -18,9 +18,9 @@ for j in ${arr_cpu2[*]};do
     total_cpu2=$[$total_cpu2+$j]
 done
 
-total=$[$total_cpu2-$total_cup1]                                             #CPU在时间1和时间2之间的使用时间
+total=$[$total_cpu2-$total_cup1]                                             #total代表CPU在时间1和时间2之间的使用时间
 
-free=$[${arr_cpu2[3]}-${arr_cpu1[3]}]                                        #CPU在时间1和时间2之间的空闲时间
+free=$[${arr_cpu2[3]}-${arr_cpu1[3]}]                                        #free代表CPU在时间1和时间2之间的空闲时间
 percent_free=`echo "scale=2;${free}*100/${total}" | bc`                      #percent_free代表CPU空闲率
 percent_use=`echo "scale=2;100-$percent_free" | bc`                          #percen_use代表CPU占用率
 CPU_temperature=`sensors | awk 'NR == 3 {print $2}' | cut -d "+" -f 2`       #CPU_temperature代表CPU温度
