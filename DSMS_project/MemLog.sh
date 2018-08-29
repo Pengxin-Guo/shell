@@ -1,7 +1,14 @@
 #!/bin/bas
+#该脚本为获取一些内存信息
 #输出当前计算机的时间、总内存、剩余内存、内存占用率和占用百分比动态平均值
+
 if [ ! "$1" ];then
-    echo [ERROR]: Missing parameters
+    echo [ERROR]: Missing parameter
+    exit
+fi
+
+if [ `echo "$1 > 100" | bc` -eq 1 -o `echo "$1 <= 0" | bc` -eq 1 ];then
+    echo [WARNING]: Parameter crossing
     exit
 fi
 
