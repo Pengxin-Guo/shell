@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/bash 
+#该脚本为获取一些系统运行状况信息
+
 date=`date +"%Y-%m-%d__%T"`                                                                            #date代表当前时间
 hostname=`uname -n`                                                                                    #hostname代表主机名
 osname=`uname -o`                                                                                      #osname代表OS版本
