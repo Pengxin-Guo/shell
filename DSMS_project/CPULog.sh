@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/bash 
+#该脚本主要获取一些CPU信息 
+
 load=`cat /proc/loadavg | cut -d " " -f 1-3`                                 #load代表3个平均负载
 #cat /proc/loadavg 输出5个值
 #前三个值分别代表系统5分钟、10分钟、15分钟前的平均负载
@@ -7,7 +9,7 @@ load=`cat /proc/loadavg | cut -d " " -f 1-3`                                 #lo
 arr_cpu1=(`cat /proc/stat | head -n 1 | cut -d " " -f 2-`)                   #arr_cpu1代表时间1下的CPU信息
 sleep 0.5                                                                    #CPU等待0.5秒再执行
 arr_cpu2=(`cat /proc/stat | head -n 1 | cut -d " " -f 2-`)                   #arr_cpu2代表时间2下的CPU信息 
-date=`date +"%Y-%d-%m__%T"`                                                  #date代表当前时间，date之所以不能放在第一行是因为程序执行过程中有sleep 0.5这个语句
+date=`date +"%Y-%m-%d__%T"`                                                  #date代表当前时间，date之所以不能放在第一行是因为程序执行过程中有sleep 0.5这个语句
 total_cup1=0                                                                 #total_cup1代表截止到时间1的CPU总使用时间
 total_cpu2=0                                                                 #total_cpu2代表截止到时间2的CPU总使用时间 
 for i in ${arr_cpu1[*]};do
