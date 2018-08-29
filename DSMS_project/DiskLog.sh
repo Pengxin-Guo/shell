@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/bash 
+#该脚本为获取一些磁盘信息
+
 date=`date +"%Y-%m-%d__%T"`                  #date代表当前时间
 eval `df -m | grep "^/dev" | awk '{printf("arr_total["NR"]=%d;arr_used["NR"]=%d;arr_percent["NR"]=%s;arr_path["NR"]=%s\n",$2,$3,$5,$6)}'`
 total=0                                      #total代表磁盘总量,单位是M
