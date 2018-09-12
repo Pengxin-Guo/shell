@@ -30,7 +30,7 @@ CPU_temperature_num=`echo $CPU_temperature | tr -c [0-9,\.] " "`             #CP
 level=""                                                                     #level代表当前CPU温度警报级别
 if [ `echo "$CPU_temperature_num < 50" | bc` -eq 1 ];then
     level="normal"
-elif [ `echo "$CPU_temperature_num < 70" | bc` -eq 1];then
+elif [ `echo "$CPU_temperature_num < 70" | bc` -eq 1 ];then
     level="note"
 else
     level="warning"
