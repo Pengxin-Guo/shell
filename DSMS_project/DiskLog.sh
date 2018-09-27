@@ -21,5 +21,5 @@ for i in `seq 1 ${#arr_total[@]}`;do
 done
 COMMENT
 
-df -m | grep "^/dev" | awk -f ./Disk_awk.txt date=`date +%Y-%m-%d__%T`
+df -m | grep "^/dev" | awk -f ~/Github/shell/DSMS_project/Disk_awk.txt date=`date +%Y-%m-%d__%T`
 
