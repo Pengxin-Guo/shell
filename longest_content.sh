@@ -32,11 +32,11 @@ function listFilrs() {
             #echo "$1/$file   文件大小大于1MB"
             continue                                                 #如果文件大小大于1MB,则跳过
         else
-            file $1/$file | grep "executable" >/dev/null             #如果是二进制文件，则跳过
-            if [[ $? ]]; then
-                continue
+            file $1/$file | grep "executable" >/dev/null
+            if [[ $? == 0 ]]; then
+                continue                                             #如果是二进制文件，则跳过
             else 
-                find_maxone $1/$file
+                find_maxone $1/$file                                 #否则读取该文件内容　
             fi
         fi
     done
