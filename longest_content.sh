@@ -26,13 +26,18 @@ function listFilrs() {
     #1st param, the dir name
     for file in `ls $1`; do
         flag=0
-        if [[ -d "$1/$file" ]]; then    #如果是目录,则遍历目录下的所有文件
+        if [[ -d "$1/$file" ]]; then                                 #如果是目录,则遍历目录下的所有文件
             listFilrs "$1/$file"
         elif [[ `du -s $1/$file|awk '{print $1}'` -gt $maxsize ]]; then
             #echo "$1/$file   文件大小大于1MB"
-            continue                    #如果文件大小大于1MB,则跳过
+            continue                                                 #如果文件大小大于1MB,则跳过
         else
-            find_maxone $1/$file
+            file $1/$file | grep "executable" >/dev/null             #如果是二进制文件，则跳过
+            if [[ $? ]]; then
+                continue
+            else 
+                find_maxone $1/$file
+            fi
         fi
     done
 }
