@@ -7,8 +7,8 @@ word=""         #最长字符串内容
 flag=1
 
 function find_maxone() {
-    #words=`cat $1 | tr -s -c "a-zA-Z" "\n"`
-    words=`cat $1`
+    words=`cat $1 | tr -s -c "a-zA-Z" "\n"`
+    #words=`cat $1`
     for a in $words; do
         #temp_length=`echo -n $a | wc -c`
         temp_length=${#a}
