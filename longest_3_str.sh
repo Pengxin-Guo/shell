@@ -45,7 +45,7 @@ function find_top3() {
     for a in $words; do
         #temp_length=`echo -n $a | wc -c`
         temp_length=${#a}
-        line=`cat -n $1 | grep $a | awk '{print $1}'`
+        line=`cat -n $1 | grep $a | awk '{print $1}' 2>/dev/null`
         temp=($temp_length "$a" "$1" $line)
         if [[ $num -le 3 ]];then
             if [[ $num -eq 1 ]]; then
