@@ -14,4 +14,5 @@ for i in `seq 1 10`; do
 done
 
 echo -e "\033[32m *******************以下为程序运行结果***********************\033[0m"
-cat ./pi.out | sort -n -r | head -n 3 | awk '{printf("%-110s\t%s\t%s\n", $2, $3, $4)}'
+cat ./pi.out | sort -n -r | head -n 3 | awk '{printf("%s:%s\t%s\tLine:%s\n",$1, $2, $3, $4)}' > ./.score.txt
+

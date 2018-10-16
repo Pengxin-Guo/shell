@@ -40,8 +40,8 @@ function sort_data() {
 }
 
 function find_top3() {
-    #words=`cat $1 | tr -s -c "a-zA-Z" "\n"`
-    words=`cat $1`
+    words=`cat "$1" | tr -s -c "a-zA-Z0-9" "\n"`
+    #words=`cat $1`
     for a in $words; do
         #temp_length=`echo -n $a | wc -c`
         temp_length=${#a}
@@ -69,8 +69,17 @@ function find_top3() {
 function listFiles() {    
     maxsize=1024
     #1st param, the dir name
-    for file in `ls $1`; do
+    for file in `ls -a $1`; do
         flag=0
+        if [ $file = "." ]; then
+            echo "HHHHHHHH"
+            continue
+            echo "ddddddddd"
+        fi 
+        if [ $file = ".." ]; then
+            echo "******"
+            continue
+        fi
         if [[ -d "$1/$file" ]]; then                                 #如果是目录,则遍历目录下的所有文件
             listFiles "$1/$file"
         else
@@ -82,7 +91,7 @@ function listFiles() {
     done
 }
 
-listFiles .
+listFiles /home/sanjin
 
 if [[ flag -eq 0 ]]; then
     echo ${max1_str[*]}
