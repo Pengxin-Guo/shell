@@ -94,3 +94,4 @@ if [[ flag -eq 0 ]]; then
 else
     echo "该文件或目录不存在"
 fi
+
